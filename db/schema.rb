@@ -17,11 +17,11 @@ ActiveRecord::Schema.define(version: 20150217061733) do
   enable_extension "plpgsql"
 
   create_table "reminders", force: :cascade do |t|
-    t.text     "origin"
-    t.text     "destination"
+    t.text     "origin",                       null: false
+    t.text     "destination",                  null: false
     t.text     "email"
     t.text     "repeat"
-    t.datetime "arrival_time"
+    t.datetime "arrival_time",                 null: false
     t.boolean  "is_finished",  default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
