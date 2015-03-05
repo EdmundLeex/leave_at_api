@@ -16,6 +16,7 @@ module LeaveAtAPI
 
   class App < Sinatra::Application
     register Sinatra::ActiveRecordExtension
+    use ActiveRecord::ConnectionAdapters::ConnectionManagement
 
     set :root, File.dirname(__FILE__)
 
