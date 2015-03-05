@@ -1,7 +1,7 @@
 #############################
 # routes/root.rb
 #############################
-module TimeToLeave
+module LeaveAtAPI
 module Routes
 
   class RootRoute < Base

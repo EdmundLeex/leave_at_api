@@ -1,2 +1,3 @@
 require './app'
-run TimeToLeave::App
+
+run Rack::URLMap.new('/api' => LeaveAtAPI::App)

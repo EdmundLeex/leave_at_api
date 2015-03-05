@@ -12,7 +12,7 @@ require_relative '../app.rb'
 
 include Rack::Test::Methods
 
-def app; TimeToLeave::App.new; end
+def app; LeaveAtAPI::App.new; end
 
 VCR.configure do |config|
   config.cassette_library_dir = "tests/fixtures/vcr_cassettes"
