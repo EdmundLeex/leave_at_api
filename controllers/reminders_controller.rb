@@ -1,5 +1,5 @@
 #############################
-# routes/root.rb
+# controllers/reminders_controller.rb
 #############################
 module LeaveAtApi
   class RemindersController < ApplicationController
