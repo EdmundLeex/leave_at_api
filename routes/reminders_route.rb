@@ -1,7 +1,7 @@
 #############################
 # routes/root.rb
 #############################
-module LeaveAtAPI
+module LeaveAtApi
 module Routes
 
   class RemindersRoute < Base

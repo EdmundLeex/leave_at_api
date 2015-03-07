@@ -2,7 +2,7 @@
 #############################
 # models/destination.rb
 #############################
-module LeaveAtAPI
+module LeaveAtApi
 module Models
 
   class Reminder < ActiveRecord::Base

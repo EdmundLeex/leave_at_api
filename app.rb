@@ -12,7 +12,7 @@ require_all 'models', 'routes'
 
 Dotenv.load
 
-module LeaveAtAPI
+module LeaveAtApi
 
   class App < Sinatra::Application
     register Sinatra::ActiveRecordExtension

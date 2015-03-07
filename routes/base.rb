@@ -1,7 +1,7 @@
 #############################
 # routes/base.rb
 #############################
-module LeaveAtAPI
+module LeaveAtApi
 module Routes
 
   class Base < Sinatra::Base
