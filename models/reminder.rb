@@ -1,10 +1,10 @@
 # encoding: UTF-8
 #############################
-# models/destination.rb
+# models/reminder.rb
 #############################
 module LeaveAtApi
   class Reminder < ActiveRecord::Base
-    validates :origin, :destination, :arrival_time, presence: true
+    validates :origin, :destination, :arrival_time, :user_id, presence: true
     validates :is_finished, inclusion: { in: [true, false] }
 
     def self.active_for interval

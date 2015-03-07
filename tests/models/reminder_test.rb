@@ -5,29 +5,20 @@
 require_relative '../test_helper'
 
 class LeaveAtApi::ReminderTest < Minitest::Test
-  REQUIRED_ATTRS = { origin: 'foo',
-                     destination: 'bar',
-                     arrival_time: Time.now,
-                     is_finished: false }
+  include ModelTests
 
   def setup
-    @model = LeaveAtApi::Reminder.new(REQUIRED_ATTRS)
+    @required_attrs = { user_id: 123,
+                        origin: 'foo',
+                        destination: 'bar',
+                        arrival_time: Time.now,
+                        is_finished: false }
+
+    @model = LeaveAtApi::Reminder.new(@required_attrs)
   end
 
   def teardown
     @model.destroy
-  end
-
-  # test required attrs
-  REQUIRED_ATTRS.each do |attr_name, value|
-    define_method "test_required_attr_#{attr_name}" do
-      assert @model.valid?
-
-      @model.send "#{attr_name}=", nil
-      refute @model.valid?, "'#{attr_name}' should be required"
-
-      @model.send "#{attr_name}=", value
-    end
   end
 
   def test_class_method_active_for

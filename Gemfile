@@ -16,6 +16,4 @@ gem 'require_all',            '~> 1.3.2'
 
 group :test do
   gem 'rack-test'
-  gem 'vcr'
-  gem 'webmock'
 end

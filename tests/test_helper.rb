@@ -6,9 +6,10 @@ ENV['RACK_ENV'] = 'test'
 
 require 'minitest/autorun'
 require 'rack/test'
-require 'vcr'
+require 'require_all'
 
 require_relative '../app.rb'
+require_all 'tests/modules'
 
 include Rack::Test::Methods
 
