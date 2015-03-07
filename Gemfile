@@ -13,6 +13,7 @@ gem 'sinatra-activerecord',   '~> 2.0.5'
 gem 'dotenv',                 '~> 1.0.2'
 gem 'pg',                     '~> 0.18.1'
 gem 'require_all',            '~> 1.3.2'
+gem 'bcrypt',                 '~> 3.1.10'
 
 group :test do
   gem 'rack-test'
