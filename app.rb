@@ -8,22 +8,17 @@ require 'pp'
 
 Bundler.require
 
-require_all 'models', 'routes'
+require_all 'models', 'controllers'
 
 Dotenv.load
 
 module LeaveAtApi
-
-  class App < Sinatra::Application
+  class App < Sinatra::Base
     register Sinatra::ActiveRecordExtension
+
     use ActiveRecord::ConnectionAdapters::ConnectionManagement
-
-    set :root, File.dirname(__FILE__)
-
     use Rack::Deflater
 
-    use Routes::RootRoute
-    use Routes::RemindersRoute
+    use RemindersController
   end
-
 end

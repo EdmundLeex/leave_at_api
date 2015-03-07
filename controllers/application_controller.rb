@@ -2,9 +2,7 @@
 # routes/base.rb
 #############################
 module LeaveAtApi
-module Routes
-
-  class Base < Sinatra::Base
+  class ApplicationController < Sinatra::Base
     register Sinatra::CrossOrigin
     configure { enable :cross_origin }
 
@@ -17,6 +15,4 @@ module Routes
       posted_body.empty? ? {} : JSON.parse(posted_body)
     end
   end
-
-end
 end

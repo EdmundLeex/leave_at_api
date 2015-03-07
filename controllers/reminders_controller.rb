@@ -2,17 +2,15 @@
 # routes/root.rb
 #############################
 module LeaveAtApi
-module Routes
-
-  class RemindersRoute < Base
+  class RemindersController < ApplicationController
     BASE_URL = '/reminders'.freeze
 
     get BASE_URL + '/?' do
-      json Models::Reminder.active_for(params[:interval] || 3.hours)
+      json Reminder.active_for params[:interval] || 3.hours
     end
 
     get BASE_URL + '/:id/?' do
-      json Models::Reminder.find(params[:id])
+      json Reminder.find params[:id]
     end
 
     # post BASE_URL + '/?' do
@@ -28,9 +26,9 @@ module Routes
     # end
 
     post BASE_URL + '/:id/?' do
-      reminder = Models::Reminder.find(params[:id])
+      reminder = Reminder.find params[:id]
 
-      if reminder.update(parsed_params)
+      if reminder.update parsed_params
         status 200
         json reminder
       else
@@ -47,6 +45,4 @@ module Routes
     #   'deleted'
     # end
   end
-
-end
 end

@@ -3,13 +3,12 @@
 # models/destination.rb
 #############################
 module LeaveAtApi
-module Models
-
   class Reminder < ActiveRecord::Base
-    def self.active_for(interval)
+    validates :origin, :destination, :arrival_time, presence: true
+    validates :is_finished, inclusion: { in: [true, false] }
+
+    def self.active_for interval
       where('arrival_time <= ?', Time.now + interval).where(is_finished: false)
     end
   end
-
-end
 end
