@@ -40,10 +40,9 @@ ActiveRecord::Schema.define(version: 20150307073436) do
   add_index "sessions", ["token"], name: "index_sessions_on_token", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.text    "email",                                 null: false
-    t.text    "password",                              null: false
-    t.text    "password_confirmation",                 null: false
-    t.boolean "is_admin",              default: false, null: false
+    t.text    "email",                           null: false
+    t.text    "password_digest",                 null: false
+    t.boolean "is_admin",        default: false, null: false
   end
 
 end

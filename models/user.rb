@@ -6,8 +6,6 @@ module LeaveAtApi
   class User < ActiveRecord::Base
     has_secure_password
 
-    attr_accessor :password_digest
-
     has_many :reminders
     has_many :sessions
 
