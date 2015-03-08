@@ -20,5 +20,9 @@ module LeaveAtApi
     use Rack::Deflater
 
     use RemindersController
+
+    Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+      username == ENV["SIDEKIQ_USERNAME"] && password == ENV["SIDEKIQ_PASSWORD"]
+    end if ENV['RACK_ENV'] == 'production'
   end
 end
