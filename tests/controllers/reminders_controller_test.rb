@@ -8,15 +8,20 @@ class LeaveAtApi::RemindersControllerTest < Minitest::Test
   def setup
     @model = create :reminder
     @base_url = LeaveAtApi::RemindersController::BASE_URL
+
+    authenticate @model.user
   end
 
   def teardown
     @model.user.destroy
     @model.destroy
+
+    revoke @session
   end
 
   def test_get_index
     get @base_url
+
     assert 200, last_response.status
 
     parsed_resp = JSON.parse last_response.body

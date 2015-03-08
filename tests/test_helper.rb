@@ -16,3 +16,12 @@ include FactoryGirl::Syntax::Methods
 
 def app; LeaveAtApi::App.new; end
 
+def authenticate user
+  @session ||= create(:session, user: user)
+  header 'ACCESS_TOKEN', @session.token
+end
+
+def revoke session
+  session.destroy
+end
+

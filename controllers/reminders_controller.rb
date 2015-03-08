@@ -6,11 +6,19 @@ module LeaveAtApi
     BASE_URL = '/reminders'.freeze
 
     get BASE_URL + '/?' do
-      json Reminder.active_for params[:interval] || 3.hours
+      if @current_user.is_admin?
+        json Reminder.active_for params[:interval] || 3.hours
+      else
+        json @current_user.reminders
+      end
     end
 
     get BASE_URL + '/:id/?' do
-      json Reminder.find params[:id]
+      if @current_user.is_admin?
+        json Reminder.find params[:id]
+      else
+        json @current_user.reminders.find params[:id]
+      end
     end
 
     # post BASE_URL + '/?' do
@@ -26,7 +34,11 @@ module LeaveAtApi
     # end
 
     post BASE_URL + '/:id/?' do
-      reminder = Reminder.find params[:id]
+      if @current_user.is_admin?
+        reminder = Reminder.find params[:id]
+      else
+        reminder = @current_user.reminders.find params[:id]
+      end
 
       if reminder.update parsed_params
         status 200
