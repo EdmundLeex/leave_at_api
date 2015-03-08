@@ -7,5 +7,6 @@ class CreateSessions < ActiveRecord::Migration
     end
 
     add_index :sessions, :token
+    add_index :sessions, :user_id
   end
 end
