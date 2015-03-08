@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150307073436) do
+ActiveRecord::Schema.define(version: 20150308054811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +25,12 @@ ActiveRecord::Schema.define(version: 20150307073436) do
     t.boolean  "is_finished",  default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
+    t.integer  "user_id",                      null: false
   end
 
   add_index "reminders", ["arrival_time"], name: "index_reminders_on_arrival_time", using: :btree
   add_index "reminders", ["is_finished"], name: "index_reminders_on_is_finished", using: :btree
+  add_index "reminders", ["user_id"], name: "index_reminders_on_user_id", using: :btree
 
   create_table "sessions", force: :cascade do |t|
     t.integer  "user_id",          null: false
@@ -38,11 +39,14 @@ ActiveRecord::Schema.define(version: 20150307073436) do
   end
 
   add_index "sessions", ["token"], name: "index_sessions_on_token", using: :btree
+  add_index "sessions", ["user_id"], name: "index_sessions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.text    "email",                           null: false
     t.text    "password_digest",                 null: false
     t.boolean "is_admin",        default: false, null: false
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
 
 end
