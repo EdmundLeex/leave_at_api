@@ -8,10 +8,6 @@ class LeaveAtApi::UserTest < Minitest::Test
   include ModelTests
 
   def setup
-    @required_attrs = { email: 'foo@bar.com',
-                        password: '1234',
-                        is_admin: false }
-
-    @model = LeaveAtApi::User.new(@required_attrs)
+    @model = build :user
   end
 end

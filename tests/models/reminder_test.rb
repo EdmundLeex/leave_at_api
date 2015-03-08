@@ -8,13 +8,7 @@ class LeaveAtApi::ReminderTest < Minitest::Test
   include ModelTests
 
   def setup
-    @required_attrs = { user_id: 123,
-                        origin: 'foo',
-                        destination: 'bar',
-                        arrival_time: Time.now,
-                        is_finished: false }
-
-    @model = LeaveAtApi::Reminder.new(@required_attrs)
+    @model = build :reminder
   end
 
   def teardown

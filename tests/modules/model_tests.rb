@@ -6,10 +6,12 @@ module ModelTests
 
   # test required attrs
   def test_required_attrs
-    raise "@required_attrs is not defined" unless @required_attrs.is_a? Hash
     raise "@model is not defined" unless @model
 
-    @required_attrs.each do |attr_name, value|
+    @model.attributes.each do |attr_name, value|
+      #skip primary key && nil values
+      next if attr_name == @model.class.primary_key || value.nil?
+
       assert @model.valid?
 
       @model.send "#{attr_name}=", nil

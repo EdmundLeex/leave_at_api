@@ -17,4 +17,5 @@ gem 'bcrypt',                 '~> 3.1.10'
 
 group :test do
   gem 'rack-test'
+  gem 'factory_girl', '~> 4.0'
 end
