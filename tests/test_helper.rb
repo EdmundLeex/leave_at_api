@@ -16,6 +16,12 @@ include FactoryGirl::Syntax::Methods
 
 def app; LeaveAtApi::App.new; end
 
+Minitest.after_run {
+  LeaveAtApi::User.destroy_all
+  LeaveAtApi::Reminder.destroy_all
+  LeaveAtApi::Session.destroy_all
+}
+
 def authenticate user
   @session ||= create(:session, user: user)
   header 'ACCESS_TOKEN', @session.token

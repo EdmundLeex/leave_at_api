@@ -8,10 +8,10 @@ class LeaveAtApi::SessionTest < Minitest::Test
   include ModelTests
 
   def setup
-    @required_attrs = { user_id: 123,
-                        token: 'foobar',
-                        token_expires_at: Time.now }
+    @model = build :session
+  end
 
-    @model = LeaveAtApi::Session.new(@required_attrs)
+  def teardown
+    @model.destroy
   end
 end

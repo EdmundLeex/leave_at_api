@@ -12,7 +12,7 @@ class LeaveAtApi::ReminderTest < Minitest::Test
   end
 
   def teardown
-    @model.destroy
+    @model.user.destroy
   end
 
   def test_class_method_active_for
