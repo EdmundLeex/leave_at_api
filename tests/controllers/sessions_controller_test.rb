@@ -14,24 +14,19 @@ class LeaveAtApi::SessionsControllerTest < Minitest::Test
     @user.destroy
   end
 
-  def test_login_success
+  def test_authenticate_success
     clear_cookies
-    post '/login', { email: @user.email, password: @user.password }
+    post '/authenticate', { email: @user.email, password: @user.password }
 
-    token = rack_mock_session.cookie_jar[@cookie_key]
-
-    refute_nil token, 'cookie should be created'
-    assert_equal SecureRandom.urlsafe_base64(32).length, token.length
+    resp = JSON.parse last_response.body
+    assert_equal SecureRandom.urlsafe_base64(32).length, resp['access_token'].length
   end
 
-  def test_login_fail
+  def test_authenticate_fail
     clear_cookies
-    post '/login'
+    post '/authenticate', { email: @user.email, password: @user.password + 'bar' }
 
     assert_equal 403, last_response.status
     assert_equal 'unauthorized', last_response.body
-
-    assert_nil rack_mock_session.cookie_jar[@cookie_key],
-               'cookie should not be created'
   end
 end
