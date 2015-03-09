@@ -37,7 +37,7 @@ class LeaveAtApi::RemindersControllerTest < Minitest::Test
   end
 
   def test_update_success
-    post @base_url + '/' + @model.id.to_s, { email: 'test@test.com' }.to_json
+    post @base_url + '/' + @model.id.to_s, { email: 'test@test.com' }
     assert 200, last_response.status
 
     parsed_resp = JSON.parse last_response.body
@@ -45,7 +45,7 @@ class LeaveAtApi::RemindersControllerTest < Minitest::Test
   end
 
   def test_update_fail
-    post @base_url + '/' + @model.id.to_s, { origin: nil }.to_json
+    post @base_url + '/' + @model.id.to_s, { origin: nil }
     assert 400, last_response.status
 
     parsed_resp = JSON.parse last_response.body

@@ -22,7 +22,7 @@ module LeaveAtApi
     end
 
     # post BASE_URL + '/?' do
-    #   reminder = Models::Reminder.new(parsed_params)
+    #   reminder = Models::Reminder.new(parsed_json_params)
 
     #   if reminder.save
     #     status 201
@@ -40,7 +40,7 @@ module LeaveAtApi
         reminder = @current_user.reminders.find params[:id]
       end
 
-      if reminder.update parsed_params
+      if reminder.update parsed_json_params
         status 200
         json reminder
       else
