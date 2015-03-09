@@ -16,7 +16,7 @@ module LeaveAtApi
 
     delete '/revoke/?' do
       @current_user.sessions.destroy_all
-      'logged out'
+      'revoked'
     end
 
   end

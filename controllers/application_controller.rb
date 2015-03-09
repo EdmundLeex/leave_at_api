@@ -16,6 +16,11 @@ module LeaveAtApi
       authenticate! unless skip_auth? request.path_info
     end
 
+    not_found do
+      status 404
+      'not found'
+    end
+
     def parsed_json_params
       request.env['rack.request.form_hash']
     end

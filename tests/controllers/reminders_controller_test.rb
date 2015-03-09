@@ -28,12 +28,19 @@ class LeaveAtApi::RemindersControllerTest < Minitest::Test
     assert_equal [@model.id], parsed_resp.map { |r| r['id'] }
   end
 
-  def test_get_with_id
+  def test_get_with_id_success
     get @base_url + '/' + @model.id.to_s
     assert 200, last_response.status
 
     parsed_resp = JSON.parse last_response.body
     assert_equal @model.id, parsed_resp['id']
+  end
+
+  def test_get_with_id_not_found
+    get @base_url + '/' + 'foobar'
+
+    assert 404, last_response.status
+    assert_equal 'not found', last_response.body
   end
 
   def test_update_success
@@ -50,5 +57,12 @@ class LeaveAtApi::RemindersControllerTest < Minitest::Test
 
     parsed_resp = JSON.parse last_response.body
     assert_includes parsed_resp.keys, 'origin'
+  end
+
+  def test_update_not_found
+    post @base_url + '/' + 'foobar'
+
+    assert 404, last_response.status
+    assert_equal 'not found', last_response.body
   end
 end

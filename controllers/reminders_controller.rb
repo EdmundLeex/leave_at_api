@@ -14,11 +14,8 @@ module LeaveAtApi
     end
 
     get BASE_URL + '/:id/?' do
-      if @current_user.is_admin?
-        json Reminder.find params[:id]
-      else
-        json @current_user.reminders.find params[:id]
-      end
+      find_reminder
+      json @reminder
     end
 
     # post BASE_URL + '/?' do
@@ -34,18 +31,14 @@ module LeaveAtApi
     # end
 
     post BASE_URL + '/:id/?' do
-      if @current_user.is_admin?
-        reminder = Reminder.find params[:id]
-      else
-        reminder = @current_user.reminders.find params[:id]
-      end
+      find_reminder
 
-      if reminder.update parsed_json_params
+      if @reminder.update parsed_json_params
         status 200
-        json reminder
+        json @reminder
       else
         status 400
-        json reminder.errors.messages
+        json @reminder.errors.messages
       end
     end
 
@@ -56,5 +49,17 @@ module LeaveAtApi
     #   status 200
     #   'deleted'
     # end
+
+  private
+
+    def find_reminder
+      @reminder = if @current_user.is_admin?
+        Reminder.find_by id: params[:id]
+      else
+        @current_user.reminders.find_by id: params[:id]
+      end
+
+      halt 404 unless @reminder
+    end
   end
 end
