@@ -8,7 +8,7 @@ module LeaveAtApi
       handle_unauthorized unless user
 
       if user.authenticate parsed_json_params['password']
-        { access_token: user.create_session.token }.to_json
+        { access_token: user.sessions.create.token }.to_json
       else
         handle_unauthorized
       end
